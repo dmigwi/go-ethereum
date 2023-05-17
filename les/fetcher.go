@@ -315,7 +315,7 @@ func (f *lightFetcher) mainloop() {
 			peer.latest = data
 
 			// Filter out any stale announce, the local chain is ahead of announce
-			if localTd != nil && data.Td.Cmp(localTd) <= 0 {
+			if localHead != nil && data.Number <= localHead.Number.Uint64() {
 				continue
 			}
 			peer.addAnno(anno)
